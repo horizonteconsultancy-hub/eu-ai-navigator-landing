@@ -1,0 +1,14 @@
+// @ts-check
+import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
+
+// https://astro.build/config
+export default defineConfig({
+  site: 'https://eu-ai-navigator.com',
+  output: 'static',
+  integrations: [tailwind()],
+  build: {
+    inlineStylesheets: 'auto',
+  },
+  compressHTML: true,
+});

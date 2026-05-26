@@ -1,0 +1,775 @@
+---
+/**
+ * EU AI Navigator — landing page (single page)
+ *
+ * Sections (matches design doc v0.3):
+ *   §1 Hero
+ *   §2 What you receive
+ *   §3 How the methodology works
+ *   §4 Two doors (audience fork)
+ *   §5 Frameworks covered
+ *   §6 Three guarantees
+ *   §7 Who is behind this
+ *   §8 Pricing + DPA
+ *   §9 FAQ
+ *   §10 Footer
+ *
+ * Cross-links to the application are configured at the top of the frontmatter
+ * (APP_URL constant). Update once the application's production URL is final.
+ *
+ * Founder image (§7) is optional — checked at build time via fs.existsSync.
+ * Drop the file into public/founder.jpg and rebuild; the <img> renders.
+ * If absent, the section renders the text block only.
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import '../styles/global.css';
+
+// ─── Cross-link target — application URL ──────────────────────────────────────
+// The landing page lives at eu-ai-navigator.com. The running application lives
+// at a separate URL (currently Render). Links to /legalNotice, /disclosures,
+// and /methodology are outward links to that application. Update once a final
+// app URL or app subdomain is in place.
+const APP_URL = 'https://eu-compliance-navigator.onrender.com';
+const LEGAL_NOTICE_URL = `${APP_URL}/#/legalNotice`;
+const DISCLOSURES_URL  = `${APP_URL}/#/disclosures`;
+const METHODOLOGY_URL  = `${APP_URL}/#/methodology`;
+
+// ─── Founder image — optional fallback ────────────────────────────────────────
+const candidates = ['founder.jpg', 'founder.jpeg', 'founder.png', 'founder.webp'];
+const founderImage = candidates
+  .map(name => ({ name, fullPath: path.join(process.cwd(), 'public', name) }))
+  .find(c => fs.existsSync(c.fullPath));
+const hasFounderImage = Boolean(founderImage);
+
+// ─── Page metadata ────────────────────────────────────────────────────────────
+const pageTitle = 'EU AI Navigator — defensible AI Act and GDPR exposure assessment';
+const pageDescription =
+  'A version-stamped, methodology-disclosed working paper on your AI system\'s ' +
+  'exposure across 23 EU and international frameworks. Built for the people who ' +
+  'have to defend the answer.';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://eu-ai-navigator.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://eu-ai-navigator.com" />
+  </head>
+
+  <body class="bg-stone-50 text-stone-800">
+
+    {/* ═══ §1 HERO ════════════════════════════════════════════════════════ */}
+    <header class="border-b border-stone-200">
+      <div class="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 pt-10 pb-16 lg:pt-14 lg:pb-20">
+        <div class="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full bg-accent-pale border border-accent-pale">
+          <span class="t-label-xs c-accent tracking-[0.18em] uppercase">
+            Beta · Methodology v2.0 · Engine v1.1-MAY26
+          </span>
+        </div>
+
+        <h1 class="t-display-lg text-stone-900 max-w-3xl">
+          Defensible AI Act and GDPR exposure assessment — built for the
+          people who have to sign it.
+        </h1>
+
+        <p class="t-body-lg text-stone-700 mt-5 max-w-2xl">
+          A structured, version-stamped working paper covering your system's
+          exposure across 23 EU and international frameworks. Designed to
+          stand up to review by your own board, your auditors, and your legal
+          team.
+        </p>
+
+        {/* Two-door CTA */}
+        <div class="mt-10 grid sm:grid-cols-2 gap-4 max-w-2xl">
+          <a
+            href={APP_URL}
+            class="inline-flex flex-col items-start gap-1 px-6 py-4 rounded-sm bg-stone-900 text-stone-50 hover:bg-stone-800 transition-colors"
+          >
+            <span class="t-label-xs text-stone-300 tracking-[0.18em] uppercase">
+              For compliance teams
+            </span>
+            <span class="t-body-md font-semibold">
+              Start an assessment →
+            </span>
+          </a>
+
+          <a
+            href="mailto:legal@novohorizonteconsultancy.com?subject=Partner%20terms%20enquiry"
+            class="inline-flex flex-col items-start gap-1 px-6 py-4 rounded-sm border border-stone-300 bg-white text-stone-900 hover:border-stone-900 transition-colors"
+          >
+            <span class="t-label-xs text-stone-500 tracking-[0.18em] uppercase">
+              For advisors
+            </span>
+            <span class="t-body-md font-semibold">
+              Use Navigator with your clients →
+            </span>
+          </a>
+        </div>
+
+        <p class="t-body-sm text-stone-500 mt-8 max-w-2xl">
+          Independent methodology. No customer data used for training. Built
+          in Rotterdam by AIGP-certified AI governance practitioners.
+        </p>
+      </div>
+    </header>
+
+    <main>
+
+      {/* ═══ §2 WHAT YOU RECEIVE ═══════════════════════════════════════════ */}
+      <section class="border-b border-stone-200">
+        <div class="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 py-16 lg:py-20">
+          <h2 class="t-display-md">What you receive</h2>
+          <p class="t-body-md text-stone-700 mt-4 max-w-2xl">
+            A confidential report — not a dashboard, not a score. The artifact
+            is structured the way a serious internal reviewer, auditor, or
+            outside counsel expects to read one: explicit scoping, explicit
+            method, explicit version, explicit limits.
+          </p>
+
+          <ul class="mt-8 grid md:grid-cols-2 gap-x-10 gap-y-6 max-w-3xl">
+            <li>
+              <div class="t-body-md font-semibold text-stone-900">
+                An explicit scoping conclusion.
+              </div>
+              <p class="t-body-sm text-stone-700 mt-1">
+                Which of 23 frameworks apply to your specific system, which do
+                not, and why — each scoping decision stamped with a persistent
+                rule reference.
+              </p>
+            </li>
+            <li>
+              <div class="t-body-md font-semibold text-stone-900">
+                Two independent risk readings.
+              </div>
+              <p class="t-body-sm text-stone-700 mt-1">
+                Your EU AI Act tier and your GDPR enforcement risk computed
+                separately, never collapsed.
+              </p>
+            </li>
+            <li>
+              <div class="t-body-md font-semibold text-stone-900">
+                A prioritised remediation roadmap.
+              </div>
+              <p class="t-body-sm text-stone-700 mt-1">
+                Assignable, sequenced, ready for a steering committee — with
+                the legal anchor named on every action.
+              </p>
+            </li>
+            <li>
+              <div class="t-body-md font-semibold text-stone-900">
+                A Documentary Evidence Score.
+              </div>
+              <p class="t-body-sm text-stone-700 mt-1">
+                An honest indicator of how well your documentation supports
+                your answers. Explicitly <em>not</em> a legal-compliance verdict.
+              </p>
+            </li>
+          </ul>
+
+          <p class="t-body-sm text-stone-500 mt-8 max-w-2xl">
+            The methodology version is printed on every cover. If we revise
+            it, you know.
+          </p>
+        </div>
+      </section>
+
+      {/* ═══ §3 HOW THE METHODOLOGY WORKS ══════════════════════════════════ */}
+      <section class="border-b border-stone-200 bg-white">
+        <div class="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 py-16 lg:py-20">
+          <h2 class="t-display-md">How we get to the answer</h2>
+          <p class="t-body-md text-stone-700 mt-4 max-w-2xl">
+            One design principle: <strong>screen broadly, assess
+            proportionately</strong>.
+          </p>
+
+          <div class="mt-10 grid md:grid-cols-3 gap-6">
+            <div class="p-6 border border-stone-200 rounded-sm bg-stone-50">
+              <div class="t-label-xs c-accent tracking-[0.18em] uppercase mb-2">
+                Panel 1
+              </div>
+              <h3 class="t-display-xs text-stone-900 mb-3">Screen broadly</h3>
+              <p class="t-body-sm text-stone-700">
+                Every assessment runs against the full set of 23 frameworks.
+                No framework is silently skipped. Out-of-scope frameworks
+                appear in the report with the rule that screened them out.
+              </p>
+            </div>
+
+            <div class="p-6 border border-stone-200 rounded-sm bg-stone-50">
+              <div class="t-label-xs c-accent tracking-[0.18em] uppercase mb-2">
+                Panel 2
+              </div>
+              <h3 class="t-display-xs text-stone-900 mb-3">
+                Assess proportionately
+              </h3>
+              <p class="t-body-sm text-stone-700">
+                A five-person consultancy and a 12,000-person bank use the
+                same methodology, calibrated to different depth, evidence
+                expectations, and language. We never pretend a SME needs
+                enterprise-grade artefacts.
+              </p>
+            </div>
+
+            <div class="p-6 border border-stone-200 rounded-sm bg-stone-50">
+              <div class="t-label-xs c-accent tracking-[0.18em] uppercase mb-2">
+                Panel 3
+              </div>
+              <h3 class="t-display-xs text-stone-900 mb-3">Disclose scoping</h3>
+              <p class="t-body-sm text-stone-700">
+                Every applicable framework, every scoped-out framework, every
+                reporting state — version-stamped, citation-anchored,
+                traceable. The methodology is publicly summarised and
+                internally maintained as a version-controlled specification.
+              </p>
+            </div>
+          </div>
+
+          <p class="mt-8">
+            <a
+              href={METHODOLOGY_URL}
+              class="t-body-md text-stone-900 underline underline-offset-4 decoration-stone-300 hover:decoration-stone-900"
+            >
+              Read the full methodology summary →
+            </a>
+          </p>
+        </div>
+      </section>
+
+      {/* ═══ §4 TWO DOORS ══════════════════════════════════════════════════ */}
+      <section class="border-b border-stone-200">
+        <div class="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 py-16 lg:py-20">
+          <h2 class="t-display-md">Built for two audiences. Same engine. Different fit.</h2>
+
+          <div class="mt-10 grid md:grid-cols-2 gap-8">
+
+            {/* LEFT — Compliance teams */}
+            <div class="p-8 border border-stone-200 rounded-sm bg-white">
+              <div class="t-label-xs c-accent tracking-[0.18em] uppercase mb-3">
+                For compliance teams
+              </div>
+              <h3 class="t-display-sm text-stone-900 mb-4">
+                When you are the one who has to defend the answer.
+              </h3>
+              <p class="t-body-md text-stone-700">
+                If you are a DPO, in-house counsel, AI governance lead, or
+                board secretary, Navigator gives you a structured first read
+                — fast enough to use, defensible enough to stand behind. The
+                artifact is the working paper a reasonable assessor would
+                write if they had a week.
+              </p>
+              <ul class="mt-5 space-y-2 t-body-sm text-stone-700 list-disc ml-5">
+                <li>
+                  Run the assessment in a single working session with the
+                  people who know the system
+                </li>
+                <li>
+                  Walk into your next steering committee with a board-ready
+                  document
+                </li>
+                <li>
+                  Keep a methodology-disclosed record of due diligence in your
+                  file
+                </li>
+              </ul>
+              <a
+                href={APP_URL}
+                class="inline-flex items-center mt-6 px-5 py-3 rounded-sm bg-stone-900 text-stone-50 hover:bg-stone-800 transition-colors t-body-md font-semibold"
+              >
+                Start an assessment →
+              </a>
+              <p class="t-body-sm text-stone-500 mt-4">
+                €297 per confidential report (beta). Locked at this price for
+                24 months for founding customers.
+              </p>
+            </div>
+
+            {/* RIGHT — Advisors */}
+            <div class="p-8 border border-stone-200 rounded-sm bg-white">
+              <div class="t-label-xs c-accent tracking-[0.18em] uppercase mb-3">
+                For advisors
+              </div>
+              <h3 class="t-display-sm text-stone-900 mb-4">
+                When your client asks "do we need to worry about the AI Act?"
+              </h3>
+              <p class="t-body-md text-stone-700">
+                Law firms, Big 4 practices, and boutique advisories use
+                Navigator as the structured front end of a client engagement.
+                Your associates run the questionnaire with the client; you
+                add the legal opinion layer. What used to be a 20-hour
+                scoping memo becomes a fixed-fee, fixed-turnaround entry
+                product.
+              </p>
+              <ul class="mt-5 space-y-2 t-body-sm text-stone-700 list-disc ml-5">
+                <li>
+                  Fixed-fee scoping product you can quote without a long
+                  intake
+                </li>
+                <li>
+                  Defensible methodology artifact your client can keep in
+                  their file
+                </li>
+                <li>Co-branding and partner attribution available by agreement</li>
+              </ul>
+              <a
+                href="mailto:legal@novohorizonteconsultancy.com?subject=Partner%20terms%20enquiry"
+                class="inline-flex items-center mt-6 px-5 py-3 rounded-sm border border-stone-900 bg-white text-stone-900 hover:bg-stone-900 hover:text-stone-50 transition-colors t-body-md font-semibold"
+              >
+                Talk to us about partner terms →
+              </a>
+              <p class="t-body-sm text-stone-500 mt-4">
+                Partner pricing: pilot from €2,500, per-report from €200.
+                Partner terms available by conversation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ §5 FRAMEWORKS COVERED ═════════════════════════════════════════ */}
+      <section class="border-b border-stone-200 bg-white">
+        <div class="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 py-16 lg:py-20">
+          <h2 class="t-display-md">23 frameworks. Three honest tiers.</h2>
+          <p class="t-body-md text-stone-700 mt-4 max-w-2xl">
+            We do not claim to "cover" frameworks we cannot assess in depth.
+            Every framework in the registry sits in one of three tiers, and
+            the tier is printed in your report.
+          </p>
+
+          <div class="mt-10 grid md:grid-cols-3 gap-6">
+            <div class="p-6 border border-stone-200 rounded-sm bg-stone-50">
+              <div class="t-label-xs c-accent tracking-[0.18em] uppercase mb-2">
+                Tier 1 · 3 frameworks
+              </div>
+              <h3 class="t-display-xs text-stone-900 mb-3">
+                Core — actively assessed
+              </h3>
+              <p class="t-body-sm text-stone-700 mb-3">
+                Full framework-specific rules, dedicated findings, scoped
+                compliance score.
+              </p>
+              <p class="t-body-sm text-stone-900 font-semibold">
+                EU AI Act · GDPR · ISO/IEC 42001
+              </p>
+            </div>
+
+            <div class="p-6 border border-stone-200 rounded-sm bg-stone-50">
+              <div class="t-label-xs c-accent tracking-[0.18em] uppercase mb-2">
+                Tier 2 · 7 frameworks
+              </div>
+              <h3 class="t-display-xs text-stone-900 mb-3">
+                Targeted — rule and overlap coverage
+              </h3>
+              <p class="t-body-sm text-stone-700 mb-3">
+                Assessed via targeted rules and cross-framework control
+                overlap.
+              </p>
+              <p class="t-body-sm text-stone-900 font-semibold">
+                ISO/IEC 27001 · NIS2 · DORA · CSRD · ePrivacy · EU Data Act ·
+                NIST AI RMF
+              </p>
+            </div>
+
+            <div class="p-6 border border-stone-200 rounded-sm bg-stone-50">
+              <div class="t-label-xs c-accent tracking-[0.18em] uppercase mb-2">
+                Tier 3 · 13 frameworks
+              </div>
+              <h3 class="t-display-xs text-stone-900 mb-3">
+                Covered — mapped and cited
+              </h3>
+              <p class="t-body-sm text-stone-700 mb-3">
+                Mapped, cited, and surfaced in the report's Source
+                Transparency Panel.
+              </p>
+              <p class="t-body-sm text-stone-900 font-semibold">
+                DSA · DMA · CRA · MDR · LED · eIDAS 2.0 · AI Liability
+                Directive · Product Liability Directive (2024) · Whistleblower
+                Directive · ISO/IEC 23894 · ISO/IEC 5338 · ISO/IEC 42005 ·
+                EDPB DPIA Template 2026
+              </p>
+            </div>
+          </div>
+
+          <p class="t-body-md text-stone-700 mt-8 max-w-3xl">
+            A framework in the <strong>Covered</strong> tier is surfaced,
+            cited, and scoped, but <strong>not scored</strong>.
+          </p>
+
+          <p class="mt-6">
+            <a
+              href={METHODOLOGY_URL}
+              class="t-body-md text-stone-900 underline underline-offset-4 decoration-stone-300 hover:decoration-stone-900"
+            >
+              Read the full methodology summary →
+            </a>
+          </p>
+        </div>
+      </section>
+
+      {/* ═══ §6 THREE GUARANTEES ═══════════════════════════════════════════ */}
+      <section class="border-b border-stone-200">
+        <div class="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 py-16 lg:py-20">
+          <h2 class="t-display-md">Three commitments to early customers.</h2>
+          <p class="t-body-md text-stone-700 mt-4 max-w-2xl">
+            Each commitment links to the matching section of our public
+            Disclosures page, where the underlying language and scope is
+            fixed.
+          </p>
+
+          <div class="mt-10 grid md:grid-cols-3 gap-6">
+            <a
+              href={`${DISCLOSURES_URL}`}
+              class="block p-6 border border-stone-200 rounded-sm bg-white hover:border-stone-900 transition-colors group"
+            >
+              <h3 class="t-display-xs text-stone-900 mb-3">
+                Your data does not train anything.
+              </h3>
+              <p class="t-body-sm text-stone-700">
+                We do not use submitted content to train, fine-tune, or
+                improve models. Our current LLM provider's paid API terms
+                state that paid API content is not used for training.
+              </p>
+              <p class="mt-4 t-label-xs c-accent tracking-[0.18em] uppercase">
+                See Disclosures §2.1 →
+              </p>
+            </a>
+
+            <a
+              href={`${DISCLOSURES_URL}`}
+              class="block p-6 border border-stone-200 rounded-sm bg-white hover:border-stone-900 transition-colors group"
+            >
+              <h3 class="t-display-xs text-stone-900 mb-3">
+                Version-stamped, every report.
+              </h3>
+              <p class="t-body-sm text-stone-700">
+                Methodology v2.0, engine v1.1-MAY26. A report produced today
+                reads the same way next year. The artifact does not silently
+                mutate server-side.
+              </p>
+              <p class="mt-4 t-label-xs c-accent tracking-[0.18em] uppercase">
+                See Disclosures §2.2 →
+              </p>
+            </a>
+
+            <a
+              href={`${DISCLOSURES_URL}`}
+              class="block p-6 border border-stone-200 rounded-sm bg-white hover:border-stone-900 transition-colors group"
+            >
+              <h3 class="t-display-xs text-stone-900 mb-3">
+                Free reassessment on material methodology change.
+              </h3>
+              <p class="t-body-sm text-stone-700">
+                If a methodology revision within 12 months changes a finding
+                in your top-five actions, you get one free reassessment per
+                report.
+              </p>
+              <p class="mt-4 t-label-xs c-accent tracking-[0.18em] uppercase">
+                See Disclosures §2.3 →
+              </p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ §7 WHO IS BEHIND THIS ═════════════════════════════════════════ */}
+      <section class="border-b border-stone-200 bg-white">
+        <div class="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 py-16 lg:py-20">
+          <h2 class="t-display-md">Built and maintained under AIGP-certified oversight.</h2>
+
+          <div class={`mt-8 ${hasFounderImage ? 'grid md:grid-cols-[auto_1fr] gap-10 items-start' : ''}`}>
+            {hasFounderImage && (
+              <div class="shrink-0">
+                <img
+                  src={`/${founderImage!.name}`}
+                  alt="Founder, Novo Horizonte Consultancy"
+                  width="240"
+                  height="300"
+                  class="rounded-sm border border-stone-200 w-48 h-auto sm:w-60"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            )}
+
+            <div class={hasFounderImage ? '' : 'max-w-3xl'}>
+              <p class="t-body-md text-stone-700">
+                Navigator is built by <strong>Novo Horizonte Consultancy</strong>,
+                based in Rotterdam, the Netherlands. The methodology is
+                maintained under AIGP-certified AI governance oversight, with
+                advisory work provided separately from the software.
+              </p>
+              <p class="t-body-md text-stone-700 mt-3">
+                The consultancy holds professional expertise in EU AI Act,
+                GDPR, NIS2, and DORA engagements. Methodology materials are
+                available for review under NDA — see Methodology §9.
+              </p>
+              <div class="mt-5 space-y-1 t-body-sm text-stone-600">
+                <div>
+                  <strong class="text-stone-900">Novo Horizonte Consultancy</strong>
+                </div>
+                <div>Rotterdam, the Netherlands</div>
+                <div>
+                  <a
+                    href="mailto:legal@novohorizonteconsultancy.com"
+                    class="text-stone-900 underline underline-offset-4 decoration-stone-300 hover:decoration-stone-900"
+                  >
+                    legal@novohorizonteconsultancy.com
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="https://novohorizonteconsultancy.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-stone-900 underline underline-offset-4 decoration-stone-300 hover:decoration-stone-900"
+                  >
+                    novohorizonteconsultancy.com
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ §8 PRICING + DPA ══════════════════════════════════════════════ */}
+      <section class="border-b border-stone-200">
+        <div class="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 py-16 lg:py-20">
+          <h2 class="t-display-md">Beta pricing. Founding-customer terms.</h2>
+
+          <div class="mt-10 grid md:grid-cols-2 gap-6">
+            <div class="p-8 border border-stone-200 rounded-sm bg-white">
+              <div class="t-label-xs c-accent tracking-[0.18em] uppercase mb-3">
+                Single assessment
+              </div>
+              <div class="t-display-md text-stone-900 mb-2">€297</div>
+              <p class="t-body-sm text-stone-500 mb-5">
+                Per confidential report (beta). One-time payment. No
+                subscription.
+              </p>
+              <ul class="t-body-sm text-stone-700 space-y-2 mb-7 list-disc ml-5">
+                <li>Full structured report</li>
+                <li>Version-stamped methodology and engine</li>
+                <li>Free re-run guarantee for 12 months</li>
+              </ul>
+              <a
+                href={APP_URL}
+                class="inline-flex items-center px-5 py-3 rounded-sm bg-stone-900 text-stone-50 hover:bg-stone-800 transition-colors t-body-md font-semibold"
+              >
+                Start an assessment →
+              </a>
+            </div>
+
+            <div class="p-8 border border-stone-200 rounded-sm bg-white">
+              <div class="t-label-xs c-accent tracking-[0.18em] uppercase mb-3">
+                Advisor / partner
+              </div>
+              <div class="t-display-md text-stone-900 mb-2">From €2,500</div>
+              <p class="t-body-sm text-stone-500 mb-5">
+                90-day pilot. Partner terms available by conversation.
+              </p>
+              <ul class="t-body-sm text-stone-700 space-y-2 mb-7 list-disc ml-5">
+                <li>12 assessments included</li>
+                <li>Co-branding and partner attribution available</li>
+                <li>Direct line to the methodology team</li>
+              </ul>
+              <a
+                href="mailto:legal@novohorizonteconsultancy.com?subject=Partner%20terms%20enquiry"
+                class="inline-flex items-center px-5 py-3 rounded-sm border border-stone-900 bg-white text-stone-900 hover:bg-stone-900 hover:text-stone-50 transition-colors t-body-md font-semibold"
+              >
+                Talk to us →
+              </a>
+            </div>
+          </div>
+
+          <p class="t-body-sm text-stone-500 mt-8 max-w-3xl">
+            Founding customers — first 20 SMEs and first 5 enterprise pilots
+            — have current beta pricing locked for 24 months after general
+            availability.
+          </p>
+
+          {/* DPA strip */}
+          <div class="mt-10 p-6 border border-stone-200 rounded-sm bg-stone-100">
+            <div class="t-label-xs c-accent tracking-[0.18em] uppercase mb-2">
+              For procurement
+            </div>
+            <p class="t-body-md text-stone-900">
+              <strong>Need a DPA for procurement?</strong> A v0.1 draft is
+              available on request, currently under outside-counsel review.
+            </p>
+            <p class="t-body-sm text-stone-700 mt-2">
+              Request via{' '}
+              <a
+                href="mailto:legal@novohorizonteconsultancy.com?subject=DPA%20request"
+                class="text-stone-900 underline underline-offset-4 decoration-stone-300 hover:decoration-stone-900"
+              >
+                legal@novohorizonteconsultancy.com
+              </a>{' '}
+              with the subject &ldquo;DPA request.&rdquo;
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ §9 FAQ ════════════════════════════════════════════════════════ */}
+      <section class="border-b border-stone-200 bg-white">
+        <div class="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 py-16 lg:py-20">
+          <h2 class="t-display-md">Honest answers to the questions we get most.</h2>
+
+          <dl class="mt-10 space-y-8 max-w-3xl">
+            <div>
+              <dt class="t-display-xs text-stone-900">
+                You are in beta. What does that mean for me?
+              </dt>
+              <dd class="t-body-md text-stone-700 mt-2">
+                Methodology is documented, version-stamped, and tested at CI
+                before each release. We are in beta because we are still
+                calibrating against real-use cases — which is why early
+                customers get protected pricing and a free re-run guarantee
+                if anything material changes.
+              </dd>
+            </div>
+
+            <div>
+              <dt class="t-display-xs text-stone-900">
+                Is this legal advice?
+              </dt>
+              <dd class="t-body-md text-stone-700 mt-2">
+                No. Navigator is a decision-support platform. Its output is
+                designed to inform and accelerate professional judgement, not
+                replace it. Material findings should be reviewed by your own
+                legal advisor — internal or external — before action.
+              </dd>
+            </div>
+
+            <div>
+              <dt class="t-display-xs text-stone-900">
+                Where does my data go?
+              </dt>
+              <dd class="t-body-md text-stone-700 mt-2">
+                Inputs are processed to generate your assessment and report.
+                They are not used for training. Full data flow is on the{' '}
+                <a
+                  href={DISCLOSURES_URL}
+                  class="text-stone-900 underline underline-offset-4 decoration-stone-300 hover:decoration-stone-900"
+                >
+                  Disclosures page
+                </a>
+                .
+              </dd>
+            </div>
+
+            <div>
+              <dt class="t-display-xs text-stone-900">
+                Which LLM is used?
+              </dt>
+              <dd class="t-body-md text-stone-700 mt-2">
+                Google Gemini, accessed via the paid Developer API. Citations
+                are restricted to a verified internal registry; LLM-generated
+                narrative passes structural validation before rendering.
+              </dd>
+            </div>
+
+            <div>
+              <dt class="t-display-xs text-stone-900">
+                Why should I trust the methodology?
+              </dt>
+              <dd class="t-body-md text-stone-700 mt-2">
+                Because it is documented, externally readable, and
+                version-stamped on every report. Read the{' '}
+                <a
+                  href={METHODOLOGY_URL}
+                  class="text-stone-900 underline underline-offset-4 decoration-stone-300 hover:decoration-stone-900"
+                >
+                  Methodology summary
+                </a>
+                , and ask your own advisor to read it.
+              </dd>
+            </div>
+
+            <div>
+              <dt class="t-display-xs text-stone-900">
+                Can my firm white-label the report?
+              </dt>
+              <dd class="t-body-md text-stone-700 mt-2">
+                Co-branding and partner attribution are available by
+                conversation under partner terms.
+              </dd>
+            </div>
+
+            <div>
+              <dt class="t-display-xs text-stone-900">
+                What's the legal package for procurement?
+              </dt>
+              <dd class="t-body-md text-stone-700 mt-2">
+                Legal Notice, Disclosures, Methodology summary, and a v0.1
+                DPA draft. All are available now; counsel review of the DPA
+                is in progress.
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+    </main>
+
+    {/* ═══ §10 FOOTER ═════════════════════════════════════════════════════ */}
+    <footer class="bg-stone-100">
+      <div class="max-w-5xl mx-auto px-6 sm:px-10 lg:px-12 py-10">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div class="t-body-sm text-stone-600">
+            <div class="font-semibold text-stone-900">
+              Novo Horizonte Consultancy
+            </div>
+            <div>Rotterdam, the Netherlands</div>
+            <div class="mt-1">Navigator is a Novo Horizonte product.</div>
+          </div>
+
+          <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 t-body-sm">
+            <a
+              href={LEGAL_NOTICE_URL}
+              class="text-stone-700 underline underline-offset-4 decoration-stone-300 hover:text-stone-900 hover:decoration-stone-900"
+            >
+              Legal Notice
+            </a>
+            <span class="text-stone-300">·</span>
+            <a
+              href={DISCLOSURES_URL}
+              class="text-stone-700 underline underline-offset-4 decoration-stone-300 hover:text-stone-900 hover:decoration-stone-900"
+            >
+              Disclosures
+            </a>
+            <span class="text-stone-300">·</span>
+            <a
+              href={METHODOLOGY_URL}
+              class="text-stone-700 underline underline-offset-4 decoration-stone-300 hover:text-stone-900 hover:decoration-stone-900"
+            >
+              Methodology
+            </a>
+            <span class="text-stone-300">·</span>
+            <a
+              href="mailto:legal@novohorizonteconsultancy.com"
+              class="text-stone-700 underline underline-offset-4 decoration-stone-300 hover:text-stone-900 hover:decoration-stone-900"
+            >
+              Contact
+            </a>
+          </nav>
+        </div>
+
+        <div class="t-label-xs text-stone-400 mt-6 tracking-wide">
+          © 2026 Novo Horizonte Consultancy. Methodology v2.0 · Engine v1.1-MAY26
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
